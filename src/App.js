@@ -16,27 +16,22 @@ export default class App extends React.Component {
 
   handleSubmitForm = (e) => {
     e.preventDefault();
-    if (this.validateEmail() && this.checkConsent()) {
-      if (this.state.isAgreeWithTerms) {
-        alert('The form has been successfully submitted')
-      }
-    }
-  }
+    const isValidEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email);
+    const isValidCheckbox = this.state.isAgreeWithTerms;
 
-  validateEmail = () => {
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+    if (!isValidEmail) {
       alert('Uncorrect email');
-      return false
-    }
-    return true
-  }
+      return
+    };
 
-  checkConsent = () => {
-    if (!this.state.isAgreeWithTerms) {
+    if (!isValidCheckbox) {
       alert('Your consent is required');
-      return false
-    }
-    return true
+      return
+    };
+
+    this.setState({email: '', isAgreeWithTerms: false});
+
+    alert('The form has been successfully submitted')
   }
   
   render() {
