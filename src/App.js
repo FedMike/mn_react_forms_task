@@ -20,7 +20,7 @@ export default class App extends React.Component {
     const isValidCheckbox = this.state.isAgreeWithTerms;
 
     if (!isValidEmail) {
-      alert('Uncorrect email');
+      alert('Invalid email');
       return
     };
 
@@ -38,7 +38,7 @@ export default class App extends React.Component {
     const { email, isAgreeWithTerms } = this.state;
 
         return (
-            <div>
+            <form onSubmit={this.handleSubmitForm}>
                 <input
                     type="email"
                     name="email"
@@ -57,8 +57,8 @@ export default class App extends React.Component {
                     I agree with terms and conditions
                 </label>
                 <br />
-                <button onClick={this.handleSubmitForm}>Send</button>
-            </div>
+                <button type='submit'>Send</button>
+            </form>
         );
   }
 }
